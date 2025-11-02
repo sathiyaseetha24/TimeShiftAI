@@ -8,4 +8,6 @@ pytensor
 requests
 plotly
 scikit-learn
+keyboard_double_arrow_right
+
 

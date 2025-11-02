@@ -4,37 +4,15 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# ---------------- PAGE CONFIG ----------------
+
+# ✅ Must come before any Streamlit UI commands
 st.set_page_config(
     page_title="TimeShiftAI — Future Decision Lab",
     layout="wide",
-    initial_sidebar_state="expanded",
-    page_icon="🕰️"
+    initial_sidebar_state="expanded"
 )
 
-# ✅ Fix for 'keyboard_double_arrow_right' showing as text instead of icon
-st.markdown("""
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-    <style>
-        .material-symbols-outlined {
-            font-family: 'Material Symbols Outlined';
-            font-weight: normal;
-            font-style: normal;
-            font-size: 24px;
-            line-height: 1;
-            letter-spacing: normal;
-            text-transform: none;
-            display: inline-block;
-            white-space: nowrap;
-            direction: ltr;
-            -webkit-font-feature-settings: 'liga';
-            -webkit-font-smoothing: antialiased;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-
-# ---------------- HIDE SIDEBAR TOGGLE ----------------
+# Hide the sidebar toggle (keyboard_double_arrow_right)
 st.markdown("""
     <style>
         [data-testid="collapsedControl"] {
@@ -43,12 +21,23 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ---------------- CUSTOM STYLES ----------------
+# ---------------- PAGE CONFIG ----------------
+st.set_page_config(page_title="TimeShiftAI — Future Decision Lab", layout="wide", page_icon="🕰️")
+
+# ---------------- CUSTOM STYLE ----------------
 st.markdown("""
     <style>
-        * { font-family: 'Segoe UI', sans-serif !important; }
-        h1 { color: #1E88E5; font-weight: 700; }
-        h2, h3, h4, h5, h6 { color: #1565C0; font-weight: 600; }
+        * {
+            font-family: 'Segoe UI', sans-serif !important;
+        }
+        h1 {
+            color: #1E88E5;
+            font-weight: 700;
+        }
+        h2, h3, h4, h5, h6 {
+            color: #1565C0;
+            font-weight: 600;
+        }
         .stMetric {
             background-color: #F5F9FF;
             padding: 15px;
@@ -148,18 +137,19 @@ with col2:
 
     last_values = df_all[df_all["Year"] == years][["Scenario", "Wealth"]].reset_index(drop=True)
 
-    # Extract best and worst scenarios
+    # Extract the single best and worst rows correctly
     best_row = last_values.loc[last_values["Wealth"].idxmax()]
     worst_row = last_values.loc[last_values["Wealth"].idxmin()]
 
+    # Safely convert values
     best_wealth = float(best_row["Wealth"]) * conversion_rate
     worst_wealth = float(worst_row["Wealth"]) * conversion_rate
 
     st.metric("💹 Best Financial Path", best_row["Scenario"], f"{best_wealth:,.0f} {currency}")
     st.metric("⚠️ Lowest Return Path", worst_row["Scenario"], f"{worst_wealth:,.0f} {currency}")
 
-    # --- Simulated Happiness Metrics ---
-    job_satisfaction = np.random.uniform(6, 8)
+    # --- OPTIONAL: Simulated Happiness Metrics ---
+    job_satisfaction = np.random.uniform(6, 8)  # mock for demo
     freelance_freedom = np.random.uniform(7, 9)
     startup_pressure = np.random.uniform(4, 7)
 
@@ -172,7 +162,7 @@ with col2:
     h_df = pd.DataFrame.from_dict(happiness, orient='index', columns=['Happiness Score'])
     st.bar_chart(h_df)
 
-# ---------------- FINAL INSIGHT ----------------
+# --- FINAL INSIGHT ---
 st.markdown("---")
 st.subheader("💡 Decision Intelligence Summary")
 
