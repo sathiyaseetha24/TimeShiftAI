@@ -70,9 +70,10 @@ with col2:
     # empty spacer for alignment
     st.markdown(" ")
 with col3:
+    savings = st.number_input(f"Current Savings ({currency})", value=10000, step=500)
     # Row 1 right column intentionally left for balance, additional quick inputs could fit here
     st.markdown(" ")
-    st.markdown(" ")
+    
 
 # Row 2: simulation settings
 col4, col5, col6 = st.columns(3)
