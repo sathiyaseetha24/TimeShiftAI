@@ -60,31 +60,24 @@ st.markdown('<div class="input-panel">', unsafe_allow_html=True)
 
 # Row 1: core finances
 col1, col2, col3 = st.columns(3)
+
 with col1:
     currency = st.selectbox("Preferred Currency", ["AED", "USD", "INR", "EUR", "GBP"])
     salary = st.number_input(f"Monthly Salary ({currency})", value=15000, step=500)
-    savings = st.number_input(f"Current Savings ({currency})", value=10000, step=500)
-with col2:
     family_expense = st.number_input(f"Monthly Family Expense ({currency})", value=5000, step=250)
+
+with col2:
     emi = st.number_input(f"Monthly EMIs ({currency})", value=2000, step=250)
-    # empty spacer for alignment
-    st.markdown(" ")
+    risk_tolerance = st.slider("Risk Appetite (0 = Low, 10 = High)", 0, 10, 5)
+    years = st.slider("Years to Simulate", 1, 20, 10)
+
 with col3:
     savings = st.number_input(f"Current Savings ({currency})", value=10000, step=500)
-    # Row 1 right column intentionally left for balance, additional quick inputs could fit here
-    st.markdown(" ")
-    
-
-# Row 2: simulation settings
-col4, col5, col6 = st.columns(3)
-with col4:
-    risk_tolerance = st.slider("Risk Appetite (0 = Low, 10 = High)", 0, 10, 5)
-with col5:
-    years = st.slider("Years to Simulate", 1, 20, 10)
-with col6:
     growth_bias = st.slider("Market Growth Bias (%)", 0, 15, 5)
+    st.markdown(" ")
 
 st.markdown("</div>", unsafe_allow_html=True)
+
 
 # ---------------- Currency conversion (safe) ----------------
 base_currency = "AED"
