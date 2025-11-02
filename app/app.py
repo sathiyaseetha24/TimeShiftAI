@@ -62,12 +62,13 @@ with colB:
     emi = st.number_input(f"Total Monthly EMIs ({currency})", value=2000)
 with colC:
     savings = st.number_input(f"Current Savings ({currency})", value=10000)
-    risk_tolerance = st.slider("Risk Appetite (0 = Low, 10 = High)", 0, 10, 5)
-
-colD, colE = st.columns(2)
+    
+colD, colE, colF = st.columns(3)
 with colD:
-    years = st.slider("Years to Simulate", 1, 20, 10)
+    risk_tolerance = st.slider("Risk Appetite (0 = Low, 10 = High)", 0, 10, 5)
 with colE:
+    years = st.slider("Years to Simulate", 1, 20, 10)
+with colF:
     growth_bias = st.slider("Market Growth Bias (%)", 0, 15, 5)
 
 # ---------------- CURRENCY HANDLING ----------------
