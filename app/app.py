@@ -4,6 +4,14 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+
+# ✅ Must come before any Streamlit UI commands
+st.set_page_config(
+    page_title="TimeShiftAI — Future Decision Lab",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(page_title="TimeShiftAI — Future Decision Lab", layout="wide", page_icon="🕰️")
 
