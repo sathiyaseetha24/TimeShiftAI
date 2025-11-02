@@ -6,3 +6,6 @@ seaborn
 ipywidgets
 pytensor
 requests
+plotly
+scikit-learn
+

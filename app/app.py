@@ -85,25 +85,27 @@ st.line_chart(
 
 with col2:
     st.subheader("📊 Snapshot Insights")
+
     last_values = df_all[df_all["Year"] == years][["Scenario", "Wealth"]]
     best = last_values.loc[last_values["Wealth"].idxmax()]
-worst = last_values.loc[last_values["Wealth"].idxmin()]
+    worst = last_values.loc[last_values["Wealth"].idxmin()]
 
-best["Wealth"] *= conversion_rate
-worst["Wealth"] *= conversion_rate
+    # Apply currency conversion
+best_wealth = float(best["Wealth"] * conversion_rate)
+worst_wealth = float(worst["Wealth"] * conversion_rate)
+
+st.metric("💹 Best Financial Path", best["Scenario"], f"{best_wealth:,.0f} {currency}")
+st.metric("⚠️ Lowest Return Path", worst["Scenario"], f"{worst_wealth:,.0f} {currency}")
 
 
-    st.metric("💹 Best Financial Path", f"{best['Scenario']}", f"{best['Wealth']:.0f} {currency}")
-    st.metric("⚠️ Lowest Return Path", f"{worst['Scenario']}", f"{worst['Wealth']:.0f} {currency}")
-
-    # Simple happiness proxy
-    happiness = {
-        "Stay in Job": (8 - risk_tolerance/2),
-        "Join Startup": (4 + risk_tolerance/2),
-        "Go Freelance": (6 + (risk_tolerance - 5)/2)
+        happiness = {
+        "Job": job_satisfaction,
+        "Freelance": freelance_freedom,
+        "Startup": startup_pressure
     }
     h_df = pd.DataFrame.from_dict(happiness, orient='index', columns=['Happiness Score'])
     st.bar_chart(h_df)
+
 
 # --- FINAL INSIGHT ---
 st.markdown("---")
