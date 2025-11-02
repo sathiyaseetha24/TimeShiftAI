@@ -7,62 +7,41 @@ import numpy as np
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
     page_title="TimeShiftAI — Future Decision Lab",
+    page_icon="🕰️",
     layout="wide",
-    initial_sidebar_state="expanded",
-    page_icon="🕰️"
+    initial_sidebar_state="expanded"
 )
 
-# ✅ Fix for 'keyboard_double_arrow_right' showing as text instead of icon
-st.markdown("""
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-    <style>
-        .material-symbols-outlined {
-            font-family: 'Material Symbols Outlined';
-            font-weight: normal;
-            font-style: normal;
-            font-size: 24px;
-            line-height: 1;
-            letter-spacing: normal;
-            text-transform: none;
-            display: inline-block;
-            white-space: nowrap;
-            direction: ltr;
-            -webkit-font-feature-settings: 'liga';
-            -webkit-font-smoothing: antialiased;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-
-# ---------------- HIDE SIDEBAR TOGGLE ----------------
+# ---------------- CSS FIXES ----------------
 st.markdown("""
     <style>
+        /* Hide Streamlit sidebar collapse/expand button */
         [data-testid="collapsedControl"] {
-            display: none;
+            display: none !important;
         }
-    </style>
-""", unsafe_allow_html=True)
 
-# ---------------- CUSTOM STYLES ----------------
-st.markdown("""
-    <style>
+        /* General UI styling */
         * { font-family: 'Segoe UI', sans-serif !important; }
         h1 { color: #1E88E5; font-weight: 700; }
         h2, h3, h4, h5, h6 { color: #1565C0; font-weight: 600; }
+
         .stMetric {
             background-color: #F5F9FF;
             padding: 15px;
             border-radius: 12px;
             box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
         }
+
         .stMetricLabel {
             color: #333 !important;
             font-size: 16px !important;
         }
+
         .stMetricValue {
             color: #1E88E5 !important;
             font-size: 22px !important;
         }
+
         .block-container {
             padding-top: 1.5rem;
             padding-bottom: 1rem;
@@ -142,13 +121,11 @@ with col1:
         height=420
     )
 
-# --- INSIGHT SNAPSHOT ---
 with col2:
     st.subheader("📊 Snapshot Insights")
 
     last_values = df_all[df_all["Year"] == years][["Scenario", "Wealth"]].reset_index(drop=True)
 
-    # Extract best and worst scenarios
     best_row = last_values.loc[last_values["Wealth"].idxmax()]
     worst_row = last_values.loc[last_values["Wealth"].idxmin()]
 
