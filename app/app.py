@@ -54,29 +54,33 @@ st.markdown(
     "Understand how career choices, risk tolerance, and financial commitments shape your future wealth."
 )
 
-# ---------------- INPUTS — top arranged panel ----------------
-st.markdown("#### ⚙️ Configure Profile and Simulation")
-st.markdown('<div class="input-panel">', unsafe_allow_html=True)
+# ---------------- USER INPUT SECTION ----------------
+st.markdown("#### ⚙️ Configure Your Profile and Simulation")
 
-# Row 1: core finances
+# Row 1: Core Finances
 col1, col2, col3 = st.columns(3)
-
 with col1:
-    currency = st.selectbox("Preferred Currency", ["AED", "USD", "INR", "EUR", "GBP"])
+    currency = st.selectbox("Preferred Currency 💱", ["AED", "USD", "INR", "EUR", "GBP"])
     salary = st.number_input(f"Monthly Salary ({currency})", value=15000, step=500)
-    risk_tolerance = st.slider("Risk Appetite (0 = Low, 10 = High)", 0, 10, 5)
-
 with col2:
-    emi = st.number_input(f"Monthly EMIs ({currency})", value=2000, step=250)
     family_expense = st.number_input(f"Monthly Family Expense ({currency})", value=5000, step=250)
-    years = st.slider("Years to Simulate", 1, 20, 10)
-
+    emi = st.number_input(f"Monthly EMIs ({currency})", value=2000, step=250)
 with col3:
     savings = st.number_input(f"Current Savings ({currency})", value=10000, step=500)
-    st.markdown("<br><br>", unsafe_allow_html=True)  # adds vertical space
+
+# Small visual divider
+st.markdown("<hr style='margin: 1.5rem 0; border: 1px solid #eee;'>", unsafe_allow_html=True)
+st.markdown("#### 🎯 Simulation Settings")
+
+# Row 2: Simulation Parameters
+col4, col5, col6 = st.columns(3)
+with col4:
+    risk_tolerance = st.slider("Risk Appetite (0 = Low, 10 = High)", 0, 10, 5)
+with col5:
+    years = st.slider("Years to Simulate", 1, 20, 10)
+with col6:
     growth_bias = st.slider("Market Growth Bias (%)", 0, 15, 5)
 
-st.markdown("</div>", unsafe_allow_html=True)
 
 
 # ---------------- Currency conversion (safe) ----------------
