@@ -64,17 +64,17 @@ col1, col2, col3 = st.columns(3)
 with col1:
     currency = st.selectbox("Preferred Currency", ["AED", "USD", "INR", "EUR", "GBP"])
     salary = st.number_input(f"Monthly Salary ({currency})", value=15000, step=500)
-    family_expense = st.number_input(f"Monthly Family Expense ({currency})", value=5000, step=250)
+    risk_tolerance = st.slider("Risk Appetite (0 = Low, 10 = High)", 0, 10, 5)
 
 with col2:
     emi = st.number_input(f"Monthly EMIs ({currency})", value=2000, step=250)
-    risk_tolerance = st.slider("Risk Appetite (0 = Low, 10 = High)", 0, 10, 5)
+    family_expense = st.number_input(f"Monthly Family Expense ({currency})", value=5000, step=250)
     years = st.slider("Years to Simulate", 1, 20, 10)
 
 with col3:
     savings = st.number_input(f"Current Savings ({currency})", value=10000, step=500)
+    st.markdown("<br><br>", unsafe_allow_html=True)  # adds vertical space
     growth_bias = st.slider("Market Growth Bias (%)", 0, 15, 5)
-    st.markdown(" ")
 
 st.markdown("</div>", unsafe_allow_html=True)
 
