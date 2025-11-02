@@ -15,9 +15,15 @@ st.set_page_config(
 # ---------------- CSS FIXES ----------------
 st.markdown("""
     <style>
-        /* Hide Streamlit sidebar collapse/expand button */
+        /* Hide Streamlit sidebar collapse/expand button and related artifacts */
         [data-testid="collapsedControl"] {
             display: none !important;
+            visibility: hidden !important;
+        }
+        /* Remove the 'keyboard_double_arrow_right' text if it appears anywhere */
+        span:contains("keyboard_double_arrow_right") {
+            display: none !important;
+            visibility: hidden !important;
         }
 
         /* General UI styling */
